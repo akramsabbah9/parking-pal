@@ -18,27 +18,25 @@ const SuccessfulReservation = () => {
 
   error && console.log(error);
 
-  //UNUSED VARIABLE CAUSES WARNING
-  // const inventoryDetails = JSON.parse(
-  //   window.localStorage.getItem("selectedInventory")
-  // );
-  // const { _id: inventoryId, startDate, price } = inventoryDetails;
-  // const { _id: parkingPlace, apt, city, state } = inventoryDetails.parkingPlace;
-  // const reservationDetails = {
-  //   inventoryId,
-  //   startDate,
-  //   price,
-  //   parkingPlace,
-  //   address: `${apt} ${city} ${state}`,
-  //   stripeSessionId: window.localStorage.getItem("stripeSessionId"),
-  // };
+  const inventoryDetails = JSON.parse(
+    window.localStorage.getItem("selectedInventory")
+  );
+  const { _id: inventoryId, startDate, price } = inventoryDetails;
+  const { _id: parkingPlace, apt, city, state } = inventoryDetails.parkingPlace;
+  const reservationDetails = {
+    inventoryId,
+    startDate,
+    price,
+    parkingPlace,
+    address: `${apt} ${city} ${state}`,
+    stripeSessionId: window.localStorage.getItem("stripeSessionId"),
+  };
 
   useEffect(() => {
     async function saveReservation() {
-      //UNUSED VARIABLE CAUSES WARNING
-      // const { data } = await addReservation({
-      //   variables: { ...reservationDetails },
-      // });
+      await addReservation({
+        variables: { ...reservationDetails },
+      });
       localStorage.setItem("stripeSessionId", null);
       localStorage.setItem("selectedInventory", null);
       setTimeout(() => {

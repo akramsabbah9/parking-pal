@@ -4,7 +4,6 @@ import {
     Marker,
     InfoWindow
 } from '@react-google-maps/api';
-import { getAllParking } from '../../utils/dummyData.json';
 import './style.scss';
 import Search from '../SearchInput'
 import FindMeBtn from '../FindMeBtn'
@@ -25,13 +24,12 @@ const options = {
     zoomControl: true
 }
 
-const plots = getAllParking.map(location => (location))
 
 function MyMapComponent(props) {
 
 
     const [state, dispatch] = useStoreContext();
-    const [markers, setMarkers] = useState(plots)
+    const [markers, setMarkers] = useState([]);
 
     const { loading, data } = useQuery(QUERY_ALL_PARKING,
         { variables: { city: state.mapCity, startDate: state.mapDate } },

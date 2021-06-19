@@ -1,11 +1,11 @@
-# parking-pal
+# Parking Pal
 
 ParkingPal connects Providers who want to rent their parking spaces to Consumers who are looking for spaces near their location. When logged into the app, a user can both provide their parking spots or rent out a spot from another user.
 
 When providing a space, a user can add their parking space details, prices and date(s) available. When looking for a space to rent, a user can search for parking by location, and make a reservation to rent a space via stripe transaction.
 
 
-### Technology 
+## Technology 
 - MVC (Model View Controller) pattern 
 - React Application with 
     - Context API
@@ -21,56 +21,62 @@ When providing a space, a user can add their parking space details, prices and d
 - Stripe Trasanction for payments
 
 
-### Installation
+## Installation
 
 To install dependencies, run the following command from the root directory of this project: 
 
 ```npm install```
 
-You will need Node.js and MongoDB installed on your machine to run Parking-Pal locally.
+You will need Node.js and MongoDB installed on your machine to run Parking-Pal locally. You will also need to create two .env files. See the examples below:
+
+### server/.env
+
+AUTH_SECRET_STRING="some secret"
+AUTH_SECRET_EXPIRATION="2h"
+STRIPE_SECRET_KEY="stripe_key_for_transactions"
+EMAIL_SENDER_USERNAME="some@email.account"
+EMAIL_SENDER_PASSWORD="some password"
+
+### client/.env
+
+REACT_APP_GOOGLE_API_KEY="maps_api_key_please_dont_use_mine"
 
 
-### Project Deployment / GitHub Details
-
-To clone the project:
-
-- SSH - git@github.com:the-glorious-4/parking-pal.git
-- HTTPS - https://github.com/the-glorious-4/parking-pal.git
+## Project Deployment and GitHub Details
  
-Project Source code : https://github.com/the-glorious-4/parking-pal
+The project source code can be found at its GitHub repository:
+- GitHub - https://github.com/akramsabbah9/parking-pal
 
-This project is also deployed to Heroku, a cloud platform service where users can deploy their projects:
-- Heroku URL  http://parking-palz.herokuapp.com/
-
-
-### Images
-
-Home Page
-![](client/src/images/HomePage.png)
+This project is deployed to Heroku, a cloud platform service where users can deploy their projects. Try it now!
+- Heroku URL - https://parking-pal2.herokuapp.com/
 
 
-Login 
-![](client/src/images/Dashboard.png)
+## Images
+
+### Home Page
+![homepage](client/src/images/HomePage.png)
 
 
-Host a Spot
-![](client/src/images/AddParkingPlace.png)
+### Login 
+![login](client/src/images/Dashboard.png)
 
 
-
-Add Inventory
-![](client/src/images/AddInventory.png)
-
+### Host a Spot
+![host](client/src/images/AddParkingPlace.png)
 
 
-Make Reservation
-![](client/src/images/Reservation.png)
+### Add Inventory
+![addspace](client/src/images/AddInventory.png)
 
 
-Checkout and Payment.
-![](client/src/images/stripeCheckout.png)
+### Make a Reservation
+![makereservation](client/src/images/Reservation.png)
 
 
-### Questions
+### Checkout and Payment
+![checkout](client/src/images/stripeCheckout.png)
 
-If you have any additional questions about the repo, open an issue or contact us directly at abby.parkinglot@gmail.com
+
+## Questions
+
+If you have any additional questions about the project, feel free to open an issue, or contact me directly at akramsabbah9@gmail.com .

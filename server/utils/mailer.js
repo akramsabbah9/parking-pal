@@ -219,7 +219,7 @@ a[x-apple-data-detectors='true'] {
 <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
 <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
 <p style="font-size: 14px; line-height: 140%;">Thank you!</p>
-<p style="font-size: 14px; line-height: 140%;"><a href="https://parking-palz.herokuapp.com/" target="_blank" rel="noopener">Parking Pals</a></p>
+<p style="font-size: 14px; line-height: 140%;"><a href="https://parking-pal2.herokuapp.com/" target="_blank" rel="noopener">Parking Pals</a></p>
   </div>
 
       </td>

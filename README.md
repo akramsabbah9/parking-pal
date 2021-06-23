@@ -31,15 +31,19 @@ You will need Node.js and MongoDB installed on your machine to run Parking-Pal l
 
 ### server/.env
 
+```
 AUTH_SECRET_STRING="some secret"
 AUTH_SECRET_EXPIRATION="2h"
 STRIPE_SECRET_KEY="stripe_key_for_transactions"
 EMAIL_SENDER_USERNAME="some@email.account"
 EMAIL_SENDER_PASSWORD="some password"
+```
 
 ### client/.env
 
-REACT_APP_GOOGLE_API_KEY="maps_api_key_please_dont_use_mine"
+```
+REACT_APP_GOOGLE_API_KEY="your_maps_api_key"
+```
 
 
 ## Project Deployment and GitHub Details

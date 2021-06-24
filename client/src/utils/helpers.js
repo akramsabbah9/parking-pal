@@ -101,7 +101,7 @@ export function idbPromise(storeName, method, object) {
 }
 
 // gets today's date, plus an offset by x days, where x is an integer.
-export function todaysDate(x) {
+export function todaysDate(x = 0) {
     let today = new Date();
     today.setDate(today.getDate() + x);
 

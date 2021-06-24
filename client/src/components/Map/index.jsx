@@ -23,9 +23,13 @@ const options = {
 
 function MyMapComponent(props) {
     const [state, dispatch] = useStoreContext();
+    // console.log(state.mapCity, state.mapDate);
     const [markers, setMarkers] = useState([]);
 
-    const { loading, error, data } = useQuery(QUERY_ALL_PARKING);
+    const { loading, error, data } = useQuery(QUERY_ALL_PARKING, {
+        // variables: { city: state.mapCity, date: state.mapDate }
+        variables: { date: state.mapDate } // we only search by city to move the map to that city
+    });
     
     if (loading) {
         // console.log('loading');

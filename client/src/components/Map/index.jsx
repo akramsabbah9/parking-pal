@@ -31,18 +31,23 @@ function MyMapComponent(props) {
     const [state, dispatch] = useStoreContext();
     const [markers, setMarkers] = useState([]);
 
-    const { loading, data } = useQuery(QUERY_ALL_PARKING,
-        { variables: { city: state.mapCity, startDate: state.mapDate } },
-    );
+    const { loading, error, data } = useQuery(QUERY_ALL_PARKING);
+    
     if (loading) {
         // console.log('loading');
+    }
+
+    if (error) {
+        console.error(error);
     }
 
     // console.log(state.selectedInventory);
 
     useEffect(() => {
         if (data) {
-            // console.log(data.getAllInventories);
+            // console.log(new Date().getTime())
+            // console.log("it worked?", state.mapCity, myStartDate)
+            // console.log(data);
             setMarkers(data.getAllInventories);
         }
     }, [data])

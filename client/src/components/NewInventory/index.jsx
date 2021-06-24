@@ -7,6 +7,7 @@ import { ADD_INVENTORY } from "../../utils/mutations";
 
 const NewInventory = ({ parkingId, inventory, setInventory }) => {
     const [formState, setFormState] = useState({ date: "", price: 1 });
+    const [formError, setFormError] = useState("");
     const [addInventory, { error }] = useMutation(ADD_INVENTORY, {
         refetchQueries: [ { query: QUERY_USER } ]
     });
@@ -14,12 +15,41 @@ const NewInventory = ({ parkingId, inventory, setInventory }) => {
     const handleChange = event => {
         // destructure event target
         const { name, value } = event.target;
+
+        // if event name is date, reset formError
+        if (name === "date") setFormError("");
+
         // update state
         setFormState({ ...formState, [name]: value });
     }
 
+    // when the form is reset, force a change event on inputs to reset them.
+    const handleReset = event => {
+        event.preventDefault();
+        const changeEvent = new Event("change");
+
+        // setup element query selectors
+        let formDate = document.querySelector("#date");
+        let formPrice = document.querySelector("#price");
+
+        // reset elements and dispatch change event manually
+        formDate.value = "";
+        formDate.dispatchEvent(changeEvent);
+
+        formPrice.value = 1;
+        formPrice.dispatchEvent(changeEvent);
+    }
+
     const handleSubmit = async event => {
         event.preventDefault();
+
+        // validate: if date is empty, set error message and return
+        // check price here in case user edited the html maliciously
+        if (formState.date.length === 0 || formState.price <= 0) {
+            // console.log("error");
+            setFormError("Please choose a date!");
+            return;
+        }
 
         // console.log(parkingId, formState);
 
@@ -57,7 +87,7 @@ const NewInventory = ({ parkingId, inventory, setInventory }) => {
 
     return (<>
         <h2>Add a New Availability</h2>
-        <form className="add-inventory-form" onSubmit={handleSubmit}>
+        <form className="add-inventory-form" onSubmit={handleSubmit} onReset={handleReset}>
             <div className="field inv-field">
                 <label htmlFor="date">Date</label>
                 <input
@@ -84,6 +114,7 @@ const NewInventory = ({ parkingId, inventory, setInventory }) => {
             </div>
             <button type="submit">Add New Availability</button>
         </form>
+        {formError && <p className="required-field">Error: {formError}</p>}
     </>);
 };
 

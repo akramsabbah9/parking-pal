@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import "./style.scss";
 import { useMutation } from "@apollo/react-hooks";
 import { todaysDate, utcDate } from "../../utils/helpers";
-import { QUERY_USER } from "../../utils/queries";
+import { QUERY_ALL_PARKING, QUERY_USER } from "../../utils/queries";
 import { ADD_INVENTORY } from "../../utils/mutations";
 
 const NewInventory = ({ parkingId, inventory, setInventory }) => {
     const [formState, setFormState] = useState({ date: "", price: 1 });
     const [formError, setFormError] = useState("");
     const [addInventory, { error }] = useMutation(ADD_INVENTORY, {
-        refetchQueries: [ { query: QUERY_USER } ]
+        refetchQueries: [ { query: QUERY_USER }, { query: QUERY_ALL_PARKING } ]
     });
 
     const handleChange = event => {

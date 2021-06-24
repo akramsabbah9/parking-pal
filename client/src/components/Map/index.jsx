@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import {
-    GoogleMap,
-    Marker,
-    InfoWindow
-} from '@react-google-maps/api';
+import React, { useState, useEffect } from 'react';
 import './style.scss';
-import Search from '../SearchInput'
-import FindMeBtn from '../FindMeBtn'
-import prkingLogo from './images/mapPic.png'
+import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+import Search from '../SearchInput';
+import FindMeBtn from '../FindMeBtn';
+import prkingLogo from './images/mapPic.png';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_MAP_LOCATION, UPDATE_SELECTED_INVENTORY } from '../../utils/actions';
 import { useQuery } from '@apollo/react-hooks';
@@ -26,8 +22,6 @@ const options = {
 
 
 function MyMapComponent(props) {
-
-
     const [state, dispatch] = useStoreContext();
     const [markers, setMarkers] = useState([]);
 
@@ -50,7 +44,7 @@ function MyMapComponent(props) {
             // console.log(data);
             setMarkers(data.getAllInventories);
         }
-    }, [data])
+    }, [data]);
 
     // THIS MAPS OVER THE MARKERS THAT !!SHOULD!! BE RENDERED
     // markers && markers.map(marker => marker.parkingPlace && console.log(marker))
@@ -61,9 +55,7 @@ function MyMapComponent(props) {
 
             {props.findMeBtn ? <div className='findMeBtn'><FindMeBtn /></div> : null}
 
-            {props.searchBar ? <div className='searchBoxMap'>
-                <Search />
-            </div> : null}
+            {props.searchBar ? <div className='searchBoxMap'><Search /></div> : null}
 
             <GoogleMap
                 key={new Date().getTime()}
@@ -119,7 +111,7 @@ function MyMapComponent(props) {
 
             </GoogleMap>
         </div>
-    )
+    );
 }
 
 export default React.memo(MyMapComponent)

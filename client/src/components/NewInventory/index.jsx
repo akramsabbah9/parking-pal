@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.scss";
 import { useMutation } from "@apollo/react-hooks";
-import { todaysDate } from "../../utils/helpers";
+import { todaysDate, utcDate } from "../../utils/helpers";
 import { QUERY_USER } from "../../utils/queries";
 import { ADD_INVENTORY } from "../../utils/mutations";
 
@@ -26,7 +26,7 @@ const NewInventory = ({ parkingId, inventory, setInventory }) => {
         try {
             const { data : { addInventory: newInv } } = await addInventory({
                 variables: {
-                    startDate: formState.date,
+                    startDate: utcDate(formState.date),
                     price: parseFloat(formState.price),
                     parkingPlace: parkingId
                 }
@@ -42,6 +42,11 @@ const NewInventory = ({ parkingId, inventory, setInventory }) => {
                     isAvailable: newInv.isAvailable
                 }]
             });
+
+            // clear form after submission
+            event.target.reset();
+            setFormState({ date: "", price: 1 });
+
         }
         catch (e) {
             console.error(e);
@@ -59,7 +64,7 @@ const NewInventory = ({ parkingId, inventory, setInventory }) => {
                     name="date"
                     id="date"
                     type="date"
-                    min={todaysDate()}
+                    min={todaysDate(1)} // can't reserve space for current day
                     onChange={handleChange}
                 />
             </div>

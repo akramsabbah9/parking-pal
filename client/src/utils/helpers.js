@@ -8,6 +8,22 @@ export function formatPhoneNumber(str) {
     return `${str.slice(0,3)}-${str.slice(3,6)}-${str.slice(6,10)}`;
 }
 
+// convert a date from one's local timezone to UTC
+export function utcDate(str) {
+    let date = new Date(str); // implicitly read as UTC and converted to PDT
+    // we will use the getUTC...() functions to undo the offset
+    let newdate = new Date(
+        date.getUTCFullYear(), 
+        date.getUTCMonth(), 
+        date.getUTCDate(), 
+        date.getUTCHours(), 
+        date.getUTCMinutes(), 
+        date.getUTCSeconds()
+    );
+    return newdate;
+}
+
+// format a date as "Month DD, YYYY"
 export function formatDate(str) {
     let date = new Date(parseInt(str));
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -84,16 +100,19 @@ export function idbPromise(storeName, method, object) {
     });
 }
 
-export function todaysDate(){
+// gets today's date, plus an offset by x days, where x is an integer.
+export function todaysDate(x) {
     let today = new Date();
+    today.setDate(today.getDate() + x);
+
     let dd = today.getDate();
     let mm = today.getMonth() + 1;
     let yyyy = today.getFullYear();
     if (dd < 10) {
-        dd = '0' + dd
+        dd = '0' + dd;
     }
     if (mm < 10) {
-        mm = '0' + mm
+        mm = '0' + mm;
     }
     today = yyyy + '-' + mm + '-' + dd;
     return today.toString();

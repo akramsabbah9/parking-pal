@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { StoreProvider } from "./utils/GlobalState";
 
+import MyRoute from "./components/MyRoute";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 // import History from "./pages/History";
@@ -39,25 +40,25 @@ function App() {
         <div>
           <StoreProvider>
             <Switch>
-              <Route exact path="/" component={Home}></Route>
+              <MyRoute exact path="/" component={Home} title="Home"></MyRoute>
 
-              <Route exact path="/dashboard" component={Dashboard}></Route>
+              <MyRoute exact path="/dashboard" component={Dashboard} title="User Dashboard"></MyRoute>
 
-              <Route exact path="/addparking" component={AddASpot}></Route>
+              <MyRoute exact path="/addparking" component={AddASpot} title="Add a Spot"></MyRoute>
 
-              <Route exact path="/myspots" component={MySpots}></Route>
+              <MyRoute exact path="/myspots" component={MySpots} title="My Spots"></MyRoute>
 
-              {/* <Route exact path="/history" component={History}>
+              {/* <MyRoute exact path="/history" component={History} title="History">
                 {!Auth.loggedIn() ? <Redirect to="/" /> : null}
-              </Route> */}
+              </MyRoute> */}
 
-              <Route exact path="/checkout" component={Checkout}></Route>
+              <MyRoute exact path="/checkout" component={Checkout} title="Checkout"></MyRoute>
 
-              <Route exact path="/success" component={SuccessfulReservation}></Route>
+              <MyRoute exact path="/success" component={SuccessfulReservation} title="Reservation Success"></MyRoute>
 
-              <Route exact path="/findparking" component={FindASpot}></Route>
+              <MyRoute exact path="/findparking" component={FindASpot} title="Find Parking"></MyRoute>
 
-              <Route component={NoMatch} />
+              <MyRoute component={NoMatch} title="No Match" />
             </Switch>
           </StoreProvider>
         </div>

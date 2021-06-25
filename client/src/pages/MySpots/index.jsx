@@ -52,7 +52,7 @@ const MySpots = () => {
                     {/* Parking Space List */}
                     <div className="spaces-container">
                         <p>
-                            EDIT A SPACE OR ADD A NEW ONE!.
+                            EDIT A SPACE OR ADD A NEW ONE!
                         </p>
                         {spaces ?
                         <ul className="space-list">

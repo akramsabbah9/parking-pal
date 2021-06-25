@@ -2,12 +2,17 @@
     font-family: 'Black Han Sans', sans-serif;
     text-shadow: #50d890 1px 1px;
     width: 100%;
-    height: 17vh;
+    // height: 18vh;
     background-color: lightgray;
-    position: absolute;
-    top: 282vh;
-    display: flex;
+    // position: absolute;
+    // top: 282vh;
     opacity: 0.8;
+    text-align: center;
+}
+
+.credits-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 .credits {
@@ -15,23 +20,42 @@
     height: 100%;
     width: 25vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     
-    h2 {
-        font-size: 2vw;
+    h3 {
+        padding-left: 1rem;
+        font-size: 1.2rem;
     }
 }
 .github {
-    font-size: 8vh;
+    font-size: 3rem;
     text-shadow: #000 1px 1px;
     color: #50d890;
 }
 
 @media screen and (max-width: 700px){
     .didThis { display: none;}
-    .credits h2 {
-        font-size: 4vw;
+
+    .footer {
+        text-align: left;
+
+        h2 {
+            text-align: center;
+        }
+    }
+    
+    .credits-container {
+        flex-direction: column;
+    }
+
+    .credits {
+        width: 100%;
+        justify-content: start;
+        
+        h3 {
+            padding-left: 2rem;
+        }
     }
 }

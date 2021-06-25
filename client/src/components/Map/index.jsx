@@ -6,7 +6,7 @@ import FindMeBtn from '../FindMeBtn';
 import prkingLogo from './images/mapPic.png';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_MAP_LOCATION, UPDATE_SELECTED_INVENTORY } from '../../utils/actions';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { QUERY_ALL_PARKING } from "../../utils/queries";
 import { Link } from "react-router-dom";
 
@@ -23,12 +23,24 @@ const options = {
 
 function MyMapComponent(props) {
     const [state, dispatch] = useStoreContext();
-    // console.log(state.mapCity, state.mapDate);
     const [markers, setMarkers] = useState([]);
 
-    const { loading, error, data } = useQuery(QUERY_ALL_PARKING, {
-        // variables: { city: state.mapCity, date: state.mapDate }
-        variables: { date: state.mapDate } // we only search by city to move the map to that city
+    // execute query with polling, to re-query the map every 5 minutes
+    // TODO: stop polling from resetting map position every time it refetches
+    // TODO: maybe use fetchMore instead of polling, to get updates
+
+    /* Although fetchMore is often used for pagination, there are many other cases in which it is applicable.
+        For example, suppose you have a list of items (say, a collaborative todo list) and you have a way to fetch
+        items that have been updated after a certain time. Then, you don't have to refetch the whole todo list to
+        get updates: you can just incorporate the newly added items with fetchMore, as long as your updateQuery
+        function correctly merges the new results.
+    */
+
+    const { loading, error, data, refetch } = useQuery(QUERY_ALL_PARKING, {
+        pollInterval: 300000, // 5* 1000 * 60,
+        // TODO: instead of using variables, we can filter the data itself
+        // variables: { city: state.mapCity, startDate: state.mapDate }
+        variables: { startDate: state.mapDate } // we only search by city to move the map to that city
     });
     
     if (loading) {
@@ -39,16 +51,15 @@ function MyMapComponent(props) {
         console.error(error);
     }
 
-    // console.log(state.selectedInventory);
-
     useEffect(() => {
         if (data) {
-            // console.log(new Date().getTime())
-            // console.log("it worked?", state.mapCity, myStartDate)
             // console.log(data);
             setMarkers(data.getAllInventories);
         }
     }, [data]);
+
+    // console.log(state.mapCity, state.mapDate);
+    // console.log(state.selectedInventory);
 
     // THIS MAPS OVER THE MARKERS THAT !!SHOULD!! BE RENDERED
     // markers && markers.map(marker => marker.parkingPlace && console.log(marker))
@@ -118,4 +129,4 @@ function MyMapComponent(props) {
     );
 }
 
-export default React.memo(MyMapComponent)
+export default React.memo(MyMapComponent);

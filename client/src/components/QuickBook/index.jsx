@@ -1,11 +1,11 @@
 import React from 'react';
 import SearchInput from '../SearchInput';
 import FindMeBtn from '../FindMeBtn';
-import { Link, withRouter, useHistory } from "react-router-dom";
+import { Link, withRouter, /*useHistory*/ } from "react-router-dom";
 import './style.scss';
 import { todaysDate, utcDate } from '../../utils/helpers';
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_MAP_DATE, UPDATE_QUERY_CITY, SET_LOADING } from '../../utils/actions';
+import { UPDATE_MAP_DATE, UPDATE_QUERY_CITY, /*SET_LOADING*/ } from '../../utils/actions';
 import { getGeocode } from 'use-places-autocomplete';
 
 import loading from '../../images/loading.gif';
@@ -13,7 +13,7 @@ import loading from '../../images/loading.gif';
 
 const Quickbook = () => {
 
-    let history = useHistory();
+    // let history = useHistory();
 
     const [state, dispatch] = useStoreContext();
 

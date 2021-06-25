@@ -6,7 +6,7 @@ import FindMeBtn from '../FindMeBtn';
 import prkingLogo from './images/mapPic.png';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_MAP_LOCATION, UPDATE_SELECTED_INVENTORY } from '../../utils/actions';
-import { useLazyQuery, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { QUERY_ALL_PARKING } from "../../utils/queries";
 import { Link } from "react-router-dom";
 
@@ -36,7 +36,7 @@ function MyMapComponent(props) {
         function correctly merges the new results.
     */
 
-    const { loading, error, data, refetch } = useQuery(QUERY_ALL_PARKING, {
+    const { loading, error, data } = useQuery(QUERY_ALL_PARKING, {
         pollInterval: 300000, // 5* 1000 * 60,
         // TODO: instead of using variables, we can filter the data itself
         // variables: { city: state.mapCity, startDate: state.mapDate }
